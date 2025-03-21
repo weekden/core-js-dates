@@ -166,8 +166,18 @@ function formatDate(date) {
  * 12, 2023 => 10
  * 1, 2024 => 8
  */
-function getCountWeekendsInMonth(/* month, year */) {
-  throw new Error('Not implemented');
+function getCountWeekendsInMonth(month, year) {
+  let weekEndsDay = 0;
+  const coinAllDaysInMounth = new Date(year, month, 0).getDate();
+
+  for (let i = 1; i <= coinAllDaysInMounth; i += 1) {
+    const currentDay = new Date(year, month - 1, i).getDay();
+    if (currentDay === 6 || currentDay === 0) {
+      weekEndsDay += 1;
+    }
+  }
+
+  return weekEndsDay;
 }
 
 /**
@@ -213,8 +223,13 @@ function getNextFridayThe13th(/* date */) {
  * Date(2024, 5, 1) => 2
  * Date(2024, 10, 10) => 4
  */
-function getQuarter(/* date */) {
-  throw new Error('Not implemented');
+function getQuarter(date) {
+  const data = new Date(date);
+  const month = data.getMonth();
+  if (month < 3) return 1;
+  if (month > 3 && month < 6) return 2;
+  if (month > 6 && month < 9) return 3;
+  return 4;
 }
 
 /**
